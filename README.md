@@ -12,6 +12,14 @@
 
 ## Commands
 
+Commands list `commands.txt`, default:
+
 - `ping`
 - `traceroute`
 - `curl`
+
+You can change this list to setup commands list for your need.
+
+## Reference
+
+* https://access.redhat.com/solutions/65822
