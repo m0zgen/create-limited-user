@@ -71,7 +71,7 @@ setup() {
     ln -s /bin/traceroute /home/$username/programs/
     ln -s /bin/curl /home/$username/programs/
 
-    chattr +i /home/$username/.bashrc
+    chattr +i /home/$username/.bash_profile
 
     echo -n "Enter password for $username: "
     read -s passwd
