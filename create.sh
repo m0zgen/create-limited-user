@@ -84,10 +84,9 @@ setup() {
     # Read data from commands.txt
     while read -r command; do
 
-        ln -s /bin/ping /home/$command/programs/
+        ln -s /bin/$command /home/$username/programs/
 
     done < $COMMANDS
-
 
     chattr +i /home/$username/.bash_profile
 
