@@ -65,7 +65,7 @@ setup() {
     fi  
  
     readonly PATH=\$HOME/programs  
-    export PATH" > /home/$username/.bashrc
+    export PATH" > /home/$username/.bash_profile 
 
     ln -s /bin/ping /home/$username/programs/
     ln -s /bin/traceroute /home/$username/programs/
