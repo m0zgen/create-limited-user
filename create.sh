@@ -2,6 +2,15 @@
 # Limited user creator
 # Cretaed by Y.G., https://sys-adm.in
 
+# Sys env / paths / etc
+# -------------------------------------------------------------------------------------------\
+PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+SCRIPT_PATH=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
+
+COMMANDS="$SCRIPT_PATH/commands.txt"
+
+# Init
+# ---------------------------------------------------\
 # Help information
 usage() {
     echo -e "Just set username without arguments: ./create.sh userName"
@@ -38,6 +47,11 @@ setup() {
         username=$1
     fi
 
+    if [[ ! -f $COMMANDS ]]; then
+        echo -e "Create commands file list: commands.txt. Exit."
+        exit 1
+    fi
+
     if [[ ! -d /home/$username/programs ]]; then
         mkdir -p /home/$username/programs
     else
@@ -67,9 +81,13 @@ setup() {
     readonly PATH=\$HOME/programs  
     export PATH" > /home/$username/.bash_profile 
 
-    ln -s /bin/ping /home/$username/programs/
-    ln -s /bin/traceroute /home/$username/programs/
-    ln -s /bin/curl /home/$username/programs/
+    # Read data from commands.txt
+    while read -r command; do
+
+        ln -s /bin/ping /home/$command/programs/
+
+    done < $COMMANDS
+
 
     chattr +i /home/$username/.bash_profile
 
@@ -81,6 +99,8 @@ setup() {
     echo -e "\nUser: $username with Password: $passwd created. Done!"
 }
 
+# Actions
+# ---------------------------------------------------\
 if [[ -z "$1" ]]; then
     usage
     exit 1
